@@ -2,10 +2,12 @@
 
 @section('content')
 	@if(Auth::check())
-	<p>Hello, {{ Auth::user()->username ,  ' (' , Auth::user()->email  , ')'}}</p>
+		@if(Auth::User()->type == 'admin')
+			@include('layout.admin')
+		@else
+			@include('layout.user')
+		@endif
 	@else
 		@include('layout.landing-page')
 	@endif
-
-
 @stop

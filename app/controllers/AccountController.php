@@ -21,18 +21,19 @@ class AccountController extends BaseController{
 			$auth = Auth::attempt(array(
 				'email' => Input::get('email'),
 				'password' => Input::get('password'),
-				'active' => 1
+				'active' => 1 
+				
 			),$remember);
 			if($auth){
 				// Redirect to intended page
 				return Redirect::intended('/');
 			}else{
-			return Redirect::route('account-sign-in')
+			return Redirect::route('home')
 					->with('global','Invalid username or password, or account not activated');
 			}
 		}
 
-		return Redirect::route('account-sign-in')
+		return Redirect::route('home')
 			->with('global','There was a problem signing you in. Have you activated?');
 	}
 
@@ -51,7 +52,10 @@ class AccountController extends BaseController{
 			'email' 			=>'required|max:50|unique:users',
 			'username' 			=>'required|max:20|min:3|unique:users',
 			'password' 			=>'required|min:6|',
-			'password_again' 	=>'required|same:password'
+			'password_again' 	=>'required|same:password',
+			'firstname'			=>'required|max:50',
+			'middlename'		=>'required|max:50',
+			'lastname'			=>'required|max:50'
 			)
 		);
 		if($validator->fails()){
@@ -62,6 +66,10 @@ class AccountController extends BaseController{
 			$email 		= Input::get('email');
 			$username	= Input::get('username');
 			$password   = Input::get('password');
+			$firstname  = Input::get('firstname');
+			$middlename = Input::get('middlename');
+			$lastname   = Input::get('lastname');
+			$type		= 'user';
 
 			// Activation Code
 			$code 		= str_random(60);
@@ -70,14 +78,16 @@ class AccountController extends BaseController{
 				'email' => $email,
 				'username' => $username,
 				'password' => Hash::make($password),
+				'firstname' => $firstname,
+				'middlename'=> $middlename,
+				'lastname' => $lastname,
 				'code' => $code,
-				'active' => 0
-
+				'active' => 0,
+				'type' => $type
 			));
 			if($user){
-				Mail::send('emails.auth.activate', array('link' => URL::route('account-activate' , $code),'username' => $username), function($message) use ($user){
+				Mail::send('emails.auth.activate', array('link' => URL::route('account-activate' , $code),'firstname' => $firstname), function($message) use ($user){
 					$message->to($user->email, $user->username)->subject('Activate your account');
-
 				});
 
 				return Redirect::route('home')
@@ -105,7 +115,7 @@ class AccountController extends BaseController{
 			->with('global','We could not activate your account, Try again later.');
 	}
 	public function getChangePassword(){
-		return View::make('account.password');
+		return View::make('account.change-password');
 	}
 	public function postChangePassword(){
 		$validator = Validator::make(Input::all(),
@@ -192,5 +202,4 @@ class AccountController extends BaseController{
 		return Redirect::route('home')
 			->with('global','Could not recover your account.');
 	}
-
 }

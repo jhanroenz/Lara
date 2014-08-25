@@ -2,14 +2,7 @@
 Route::get('/', array(
 	'as' => 'home',
 	'uses' => 'HomeController@home'
-
 ));
-
-Route::get('/user/{username}',array(
-	'as' => 'profile-user',
-	'uses' => 'ProfileController@user'
-));
-
 /* 
 | Authenticated group
 */
@@ -18,15 +11,14 @@ Route::group(array('before' => 'auth'),function(){
 	| CSRF protection group
 	*/
 	Route::group(array('before' => 'csrf'),function(){
-			/* 
-			| Change password(POST)
-			*/
-			Route::post('/account/change-password',array(
-				'as' => 'account-change-password-post',
-				'uses' => 'AccountController@postChangePassword'
-			));
+		/* 
+		| Change password(POST)
+		*/
+		Route::post('/account/change-password',array(
+			'as' => 'account-change-password-post',
+			'uses' => 'AccountController@postChangePassword'
+		));
 	});
-
 	/* 
 	| Change password(GET)
 	*/
@@ -34,14 +26,23 @@ Route::group(array('before' => 'auth'),function(){
 		'as' => 'account-change-password',
 		'uses' => 'AccountController@getChangePassword'
 	));
-
-
 	/* 
 	| Sign out(GET)
 	*/
 	Route::get('account/sign-out',array(
 		'as' => 'account-sign-out' ,
 		'uses' => 'AccountController@getSignOut'
+	));
+	/*
+	| Search Users
+	*/
+	Route::get('/search-results',array(
+		'as' => 'search-results',
+		'uses' => 'UsersController@search'
+	));
+		Route::post('/search-results',array(
+		'as' => 'search-results',
+		'uses' => 'UsersController@searchPost'
 	));
 });
 /* 
@@ -86,8 +87,6 @@ Route::group(array('before' => 'guest'), function(){
 		'as' => 'account-recover' ,
 		'uses' => 'AccountController@getRecover'
 	));
-
-
 	/*
 	| Sign in (GET)
 	*/	

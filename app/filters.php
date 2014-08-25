@@ -37,7 +37,7 @@ Route::filter('auth', function()
 {
 	if (Auth::guest())
 	{
-		if (Auth::guest()) return Redirect::guest(URL::route('account-sign-in'));
+		if (Auth::guest()) return Redirect::guest(URL::route('home'));
 	}
 });
 

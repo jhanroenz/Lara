@@ -35,6 +35,30 @@
 				@endif
 			</div>
 		</div>
+		<div class="field row">
+			<div class="col-xs-4">		
+				<input class="form-control" placeholder="Firstname" type="text" name="firstname">
+				@if($errors->has('firstname'))
+					{{ $errors->first('firstname') }}
+				@endif
+			</div>
+		</div>
+		<div class="field row">
+			<div class="col-xs-4">		
+				<input class="form-control" placeholder="Middle Name" type="text" name="middlename">
+				@if($errors->has('middlename'))
+					{{ $errors->first('middlename') }}
+				@endif
+			</div>
+		</div>
+		<div class="field row">
+			<div class="col-xs-4">		
+				<input class="form-control" placeholder="Lastname" type="text" name="lastname">
+				@if($errors->has('lastname'))
+					{{ $errors->first('lastname') }}
+				@endif
+			</div>
+		</div>
 		<small>Note: </small><small style="color:red">*all fields are required</small>
 		<div class="field button row">
 			<input class="btn btn-success" type="submit" value="Create account">

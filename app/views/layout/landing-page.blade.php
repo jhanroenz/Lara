@@ -9,9 +9,7 @@
 </head>
 
 <div class="intro-header">
-
         <div class="container">
-
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message">
@@ -19,9 +17,18 @@
                         <h3>Saint Vincent College of Cabuyao</h3>
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
-                            <li><a href="{{ URL::route('account-sign-in') }}" class="btn btn-default btn-lg"><span class="mybutton"> Sign in</span></a>
+                            <li><a href="#" data-toggle="modal" data-target="#loginModal" class="btn btn-default btn-lg"><span class="mybutton"> Sign in</span></a>
                             </li>
                         </ul>
+                        @if(Session::has('global'))
+                                <div class="col-xs-4"></div>
+                                <div class="col-xs-4">
+                                    <div class="alert alert-info" role="alert">
+                                        <p>{{Session::get('global')}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4"></div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -55,3 +62,5 @@
             </div>
         </div>
     </footer>
+
+    @include('account.login-modal')

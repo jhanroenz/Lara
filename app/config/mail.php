@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'jhan.roenz@gmail.com', 'name' => 'Payment'),
+	'from' => array('address' => 'jhan.roenz@gmail.com', 'name' => 'Saint Vincent College of Cabuyao - Online Payment System'),
 
 	/*
 	|--------------------------------------------------------------------------

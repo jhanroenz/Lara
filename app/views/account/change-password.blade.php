@@ -4,7 +4,7 @@
 	<form action=" {{ URL::route('account-change-password-post') }}" method="post">
 		<div class="field row" >
 			<div class="col-xs-4">
-				<input class="form-control" type="password" name="old_password" placeholder="Old Password">
+				<input class="form-control" type="password" name="old_password" placeholder="Old Password" required>
 				@if($errors->has('old_password'))
 					{{ $errors->first('old_password') }}
 				@endif
@@ -12,7 +12,7 @@
 		</div>
 		<div class="field row" >
 			<div class="col-xs-4">
-				<input class="form-control" type="password" name="password" placeholder="New Password">
+				<input class="form-control" type="password" name="password" placeholder="New Password" required>
 				@if($errors->has('password'))
 					{{ $errors->first('password') }}
 				@endif				
@@ -20,7 +20,7 @@
 		</div>
 		<div class="field row" >
 			<div class="col-xs-4">			
-				<input class="form-control" type="password" name="password_again" placeholder="New password again">
+				<input class="form-control" type="password" name="password_again" placeholder="New password again" required>
 				@if($errors->has('password_again'))
 					{{ $errors->first('password_again') }}
 				@endif	
