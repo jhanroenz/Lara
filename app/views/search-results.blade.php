@@ -17,7 +17,8 @@
 					@foreach($results as $result)
 						<tr>
 							<td>
-								{{ $result->firstname }}
+								{{ $result->firstname,' ', $result->middlename,' ', $result->lastname }}
+
 							</td>
 							<td>
 								{{ $result->course }}
@@ -26,7 +27,9 @@
 								{{ $result->year }}
 							</td>
 							<td>
-								<button class="btn btn-info"><i class="fa fa-gear"></i></button>
+								<form action="{{ URL::route('student-info') }}" method="post">
+								<button class="btn btn-info" name="stud_no" value="{{$result->student_number}}" >View Details</button>
+								</form>
 							</td>
 						</tr>
 					@endforeach
@@ -38,5 +41,6 @@
             @endif
 		</div>
 	</div>
+			
 
 @stop

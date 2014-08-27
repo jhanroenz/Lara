@@ -44,6 +44,17 @@ Route::group(array('before' => 'auth'),function(){
 		'as' => 'search-results',
 		'uses' => 'UsersController@searchPost'
 	));
+	/*
+	| View User Details
+	*/
+	Route::get('/search-results/student-info',array(
+		'as' => 'student-info',
+		'uses' => 'UsersController@getStudentInfo'
+	));
+	Route::post('/search-results/student-info',array(
+		'as' => 'student-info',
+		'uses'=> 'UsersController@postStudentInfo'
+	));
 });
 /* 
 | Unauthenticated group
